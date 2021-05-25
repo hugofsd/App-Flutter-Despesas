@@ -1,4 +1,4 @@
-import 'package:despesas/models/transaction.dart';
+import './components/Transaction_User.dart';
 import 'package:flutter/material.dart';
 
 main() => runApp(ExpensesApp());
@@ -13,32 +13,18 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-//import da class de transações
-  final _transactions = {
-    Transaction(
-      id: 't1',
-      title: 'Novo Celular',
-      value: 1500.73,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Nova JBL (Caixa de som)',
-      value: 500.00,
-      date: DateTime.now(),
-    ),
-  };
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text('Despesas Pessoais'),
+          backgroundColor: Colors.purple,
         ),
         body: Column(
           //COLUNA
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-
           //linha
           crossAxisAlignment: CrossAxisAlignment.stretch,
           //lista
@@ -52,10 +38,9 @@ class MyHomePage extends StatelessWidget {
                 elevation: 7,
               ),
             ),
-            Card(
-              child: Text('Lista de Transferencia'),
-              elevation: 7,
-            )
+            // mapeando objetos para a tela
+
+            TransactionUser(),
           ],
         ));
   }
