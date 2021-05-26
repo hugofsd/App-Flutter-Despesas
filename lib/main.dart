@@ -14,6 +14,9 @@ class ExpensesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+      ),
     );
   }
 }
@@ -84,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () => _openTransactionFormModal(context),
           )
         ],
-        backgroundColor: Colors.purple,
+        // backgroundColor: Colors.purple,
       ),
       // habilitar rolagem
 
@@ -111,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        backgroundColor: Colors.purple,
+        // backgroundColor: Colors.purple,
         onPressed: () => _openTransactionFormModal(context),
       ),
       floatingActionButtonLocation:
@@ -119,4 +122,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-  
