@@ -16,6 +16,7 @@ class ExpensesApp extends StatelessWidget {
       home: MyHomePage(),
       theme: ThemeData(
         primarySwatch: Colors.purple,
+        fontFamily: 'Quicksand',
       ),
     );
   }
