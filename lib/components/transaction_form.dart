@@ -26,7 +26,7 @@ class _TransactionFormState extends State<TransactionForm> {
       return; // sai da função
     }
 
-    widget.onSubmit(title, value);
+    widget.onSubmit(title, value); // acesso ao componente statefull
   }
 
   @override
