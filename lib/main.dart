@@ -1,5 +1,11 @@
-import './components/Transaction_User.dart';
+import 'package:despesas/components/transaction_form.dart';
+
 import 'package:flutter/material.dart';
+import './components/transaction_form.dart';
+import './components/transaction_list.dart';
+
+import './models/transaction.dart';
+import 'dart:math';
 
 main() => runApp(ExpensesApp());
 
@@ -12,9 +18,57 @@ class ExpensesApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final titleController = TextEditingController();
-  final valueController = TextEditingController();
+class MyHomePage extends StatefulWidget {
+//função para abrir modal
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  //import da class de transações
+  final _transactions = {
+    Transaction(
+      id: 't1',
+      title: 'Conta 01',
+      value: 1500.73,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Conta 02',
+      value: 500.00,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't3',
+      title: 'Conta 03',
+      value: 500.00,
+      date: DateTime.now(),
+    ),
+  };
+
+  _addTransaction(String title, double value) {
+    final newTransaction = Transaction(
+        id: Random()
+            .nextDouble()
+            .toString(), //converte o valor randomicamente para double e depois para string de id unico
+        title: title,
+        date: DateTime.now(),
+        value: value);
+
+    setState(() {
+      _transactions.add(newTransaction);
+    });
+  }
+
+  _openTransactionFormModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return TransactionForm(null);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +78,7 @@ class MyHomePage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () => _openTransactionFormModal(context),
           )
         ],
         backgroundColor: Colors.purple,
@@ -48,15 +102,14 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             // mapeando objetos para a tela
-
-            TransactionUser(),
+            TransactionList(_transactions),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.purple,
-        onPressed: () {},
+        onPressed: () => _openTransactionFormModal(context),
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.centerFloat, // centralizar o botão
