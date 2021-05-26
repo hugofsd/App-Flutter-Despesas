@@ -8,6 +8,21 @@ class TransactionForm extends StatelessWidget {
 
   TransactionForm(this.onSubmit);
 
+//pesquisar
+  _submitForm() {
+    print('Dado salvo:' + titleController.text);
+    print('Dado salvo:' + valueController.text);
+    final title = titleController.text;
+    final value = double.tryParse(valueController.text) ?? 0.0;
+
+// filtro de dado invalido
+    if (title.isEmpty || value <= 0) {
+      return; // sai da função
+    }
+
+    onSubmit(title, value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -18,12 +33,16 @@ class TransactionForm extends StatelessWidget {
           children: <Widget>[
             TextField(
               controller: titleController, // setar valores para a string
+              // onSubmitted: (_) => _submitForm(), //forçar função
               decoration: InputDecoration(
                 labelText: 'Titulo',
               ),
             ),
             TextField(
               controller: valueController, // setar valores para a string
+              keyboardType: TextInputType.numberWithOptions(
+                  decimal: true), // teclado numerico
+              // onSubmitted: (_) => _submitForm(), //forçar função
               decoration: InputDecoration(
                 labelText: 'Valor (R\$)',
               ),
@@ -32,13 +51,7 @@ class TransactionForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 FlatButton(
-                  onPressed: () {
-                    print('Dado salvo:' + titleController.text);
-                    print('Dado salvo:' + valueController.text);
-                    final title = titleController.text;
-                    final value = double.tryParse(valueController.text) ?? 0.0;
-                    onSubmit(title, value);
-                  },
+                  onPressed: _submitForm,
                   child: Text('Nova Transação'),
                   textColor: Colors.purple,
                 ),
