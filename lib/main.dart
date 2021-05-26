@@ -33,20 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final _transactions = {
     Transaction(
       id: 't1',
-      title: 'Conta 01',
-      value: 1500.73,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta 02',
-      value: 500.00,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't3',
-      title: 'Conta 03',
-      value: 500.00,
+      title: 'Exemplo',
+      value: 0.0,
       date: DateTime.now(),
     ),
   };
