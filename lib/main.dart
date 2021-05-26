@@ -19,32 +19,47 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Despesas Pessoais'),
-          backgroundColor: Colors.purple,
-        ),
-        // habilitar rolagem
-        body: SingleChildScrollView(
-          child: Column(
-            //COLUNA
-            //linha
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            //lista
-            children: <Widget>[
-              //ctrl+. no card
-              Container(
-                //width: double.infinity, largura
-                child: Card(
-                  //filho
-                  child: Text('Gráfico'),
-                  elevation: 7,
-                ),
-              ),
-              // mapeando objetos para a tela
+      appBar: AppBar(
+        title: Text('Despesas Pessoais'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          )
+        ],
+        backgroundColor: Colors.purple,
+      ),
+      // habilitar rolagem
 
-              TransactionUser(),
-            ],
-          ),
-        ));
+      body: SingleChildScrollView(
+        child: Column(
+          //COLUNA
+          //linha
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          //lista
+          children: <Widget>[
+            //ctrl+. no card
+            Container(
+              //width: double.infinity, largura
+              child: Card(
+                //filho
+                child: Text('Gráfico'),
+                elevation: 7,
+              ),
+            ),
+            // mapeando objetos para a tela
+
+            TransactionUser(),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.purple,
+        onPressed: () {},
+      ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.centerFloat, // centralizar o botão
+    );
   }
 }
