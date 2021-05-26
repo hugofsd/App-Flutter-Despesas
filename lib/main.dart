@@ -1,8 +1,11 @@
+import 'package:despesas/components/chart.dart';
 import 'package:despesas/components/transaction_form.dart';
 
 import 'package:flutter/material.dart';
 import './components/transaction_form.dart';
 import './components/transaction_list.dart';
+
+import './components/chart.dart';
 
 import './models/transaction.dart';
 import 'dart:math';
@@ -35,9 +38,23 @@ class _MyHomePageState extends State<MyHomePage> {
       id: 't1',
       title: 'Exemplo',
       value: 0.0,
-      date: DateTime.now(),
+      date: DateTime.now().subtract(Duration(days: 3)), // 3 dias atrás
     ),
+    Transaction(
+        id: 't2',
+        title: 'Exemplo 2',
+        value: 10.0,
+        date: DateTime.now().subtract(Duration(days: 4)) // 4 dias atrás
+        ),
   };
+
+  List<Transaction> get _recentTransactions {
+    return _transactions.where((tr) {
+      return tr.date.isAfter(DateTime.now().subtract(
+        Duration(days: 7), // pegar a data atual e subtrair 7 dias
+      ));
+    }).toList(); //to list para n numerar e ter um padrão de lista
+  }
 
   _addTransaction(String title, double value) {
     final newTransaction = Transaction(
@@ -88,14 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //lista
           children: <Widget>[
             //ctrl+. no card
-            Container(
-              //width: double.infinity, largura
-              child: Card(
-                //filho
-                child: Text('Gráfico'),
-                elevation: 7,
-              ),
-            ),
+            Chart(_recentTransactions),
             // mapeando objetos para a tela
             TransactionList(_transactions),
           ],
