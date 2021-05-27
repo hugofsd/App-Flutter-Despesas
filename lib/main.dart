@@ -53,8 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Transaction(
         id: 't3',
         title: 'Investimento em CDB',
-        value: 500.0,
-        date: DateTime.now().subtract(Duration(days: 1)) // 1 dias atrás
+        value: 10.0,
+        date: DateTime.now().subtract(Duration(days: 4)) // 4 dias atrás
         ),
   };
 
@@ -66,13 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList(); //to list para n numerar e ter um padrão de lista
   }
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
         id: Random()
             .nextDouble()
             .toString(), //converte o valor randomicamente para double e depois para string de id unico
         title: title,
-        date: DateTime.now(),
+        date: date,
         value: value);
 
     setState(() {

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 //coloquei em statefull para ocorrer a mudança do componente
 class TransactionForm extends StatefulWidget {
-  final void Function(String, double) onSubmit; // submeter formulário
+  final void Function(String, double, DateTime) onSubmit; // submeter formulário
 
   TransactionForm(this.onSubmit);
 
@@ -30,7 +30,8 @@ class _TransactionFormState extends State<TransactionForm> {
       return; // sai da função
     }
 
-    widget.onSubmit(title, value); // acesso ao componente statefull
+    widget.onSubmit(
+        title, value, _selectedDate); // acesso ao componente statefull
   }
 
   _showDatePicker() {
