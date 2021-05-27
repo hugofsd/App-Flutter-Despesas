@@ -41,6 +41,14 @@ class Chart extends StatelessWidget {
     });
   }
 
+//soma da semana
+  double get _weekTotalValue {
+    //receber o sum(acumulador) e item(tr)
+    return groupedTransactions.fold(0.0, (sum, tr) {
+      return sum + tr['value'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     groupedTransactions;
@@ -50,14 +58,21 @@ class Chart extends StatelessWidget {
         Card(
           elevation: 6,
           margin: EdgeInsets.all(20),
-          child: Row(
-            children: groupedTransactions.map((tr) {
-              return ChartBar(
-                label: tr['day'],
-                value: tr['value'],
-                percentage: 0.3,
-              );
-            }).toList(),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: groupedTransactions.map((tr) {
+                return Flexible(
+                  fit: FlexFit.tight, // dividir os elementos de forma igual
+                  child: ChartBar(
+                    label: tr['day'],
+                    value: tr['value'],
+                    percentage: (tr['value'] as double) / _weekTotalValue,
+                  ),
+                );
+              }).toList(),
+            ),
           ),
         ),
       ],

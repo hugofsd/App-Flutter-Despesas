@@ -18,9 +18,13 @@ class ExpensesApp extends StatelessWidget {
     return MaterialApp(
       home: MyHomePage(),
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        fontFamily: 'Quicksand',
-      ),
+          primarySwatch: Colors.purple,
+          fontFamily: 'OpenSans',
+          textTheme: ThemeData.light().textTheme.copyWith(
+                  title: TextStyle(
+                fontFamily: 'Quicksand',
+                fontSize: 18,
+              ))),
     );
   }
 }
@@ -36,8 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final _transactions = {
     Transaction(
       id: 't1',
-      title: 'Exemplo',
-      value: 0.0,
+      title: 'Conta de Luz',
+      value: 100.0,
       date: DateTime.now().subtract(Duration(days: 3)), // 3 dias atrás
     ),
     Transaction(
