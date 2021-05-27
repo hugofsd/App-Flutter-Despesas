@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
 //coloquei em statefull para ocorrer a mudança do componente
 class TransactionForm extends StatefulWidget {
   final void Function(String, double) onSubmit; // submeter formulário
@@ -11,15 +13,17 @@ class TransactionForm extends StatefulWidget {
 }
 
 class _TransactionFormState extends State<TransactionForm> {
-  final titleController = TextEditingController();
+  final _titleController = TextEditingController();
 
-  final valueController = TextEditingController();
+  final _valueController = TextEditingController();
+
+  DateTime _selectedDate;
 
   _submitForm() {
-    print('Dado salvo:' + titleController.text);
-    print('Dado salvo:' + valueController.text);
-    final title = titleController.text;
-    final value = double.tryParse(valueController.text) ?? 0.0;
+    print('Dado salvo:' + _titleController.text);
+    print('Dado salvo:' + _valueController.text);
+    final title = _titleController.text;
+    final value = double.tryParse(_valueController.text) ?? 0.0;
 
 // filtro de dado invalido
     if (title.isEmpty || value <= 0) {
@@ -27,6 +31,27 @@ class _TransactionFormState extends State<TransactionForm> {
     }
 
     widget.onSubmit(title, value); // acesso ao componente statefull
+  }
+
+  _showDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(), //hj
+            firstDate: DateTime(2021),
+            lastDate: DateTime.now())
+        .then((pickedDate) {
+      // futuro
+      if (pickedDate == null) {
+        print('Executado  dentro do then');
+        return;
+      }
+
+      // setState utilizado para que o flutter entender q o dado foi auterado
+      // e que a interface precisa refletir o valor
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
   }
 
   @override
@@ -38,14 +63,14 @@ class _TransactionFormState extends State<TransactionForm> {
         child: ListView(
           children: <Widget>[
             TextField(
-              controller: titleController, // setar valores para a string
+              controller: _titleController, // setar valores para a string
               // onSubmitted: (_) => _submitForm(), //forçar função
               decoration: InputDecoration(
                 labelText: 'Titulo',
               ),
             ),
             TextField(
-              controller: valueController, // setar valores para a string
+              controller: _valueController, // setar valores para a string
               keyboardType: TextInputType.numberWithOptions(
                   decimal: true), // teclado numerico
               // onSubmitted: (_) => _submitForm(), //forçar função
@@ -53,13 +78,37 @@ class _TransactionFormState extends State<TransactionForm> {
                 labelText: 'Valor (R\$)',
               ),
             ),
+            Container(
+              height: 70,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    // expandir o componente
+                    child: Text(
+                      _selectedDate == null
+                          ? 'Sem Data'
+                          : 'Data: ${DateFormat('d/M/y').format(_selectedDate)}',
+                    ),
+                  ),
+                  FlatButton(
+                    textColor: Colors.purple,
+                    child: Text(
+                      'Selecionar Data',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: _showDatePicker,
+                  )
+                ],
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                FlatButton(
+                RaisedButton(
                   onPressed: _submitForm,
+                  color: Colors.purple,
                   child: Text('Nova Transação'),
-                  textColor: Colors.purple,
+                  textColor: Colors.white,
                 ),
               ],
             )
