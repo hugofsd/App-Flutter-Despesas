@@ -38,7 +38,8 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay)[0],
         'value': totalSum,
       };
-    });
+    }).reversed.toList();
+    //reversed para reverter os elementos
   }
 
 //soma da semana
