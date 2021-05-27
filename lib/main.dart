@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Despesas Pessoais'),
+        title: Text('Despesas'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
@@ -119,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           //COLUNA
           //linha
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.stretch, // epandir linha
           //lista
           children: <Widget>[
             //ctrl+. no card

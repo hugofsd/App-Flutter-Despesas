@@ -14,7 +14,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300, //tamanlho para scroll
+      height: 420, //tamanlho para scroll
       child: ListView(
         // lista para scroll q precisa de um pai com tamanho
         children: transactions.map((tr) {
