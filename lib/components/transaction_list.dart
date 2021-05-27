@@ -7,7 +7,9 @@ import 'package:intl/intl.dart';
 class TransactionList extends StatelessWidget {
   final Set<Transaction> transactions;
 
-  TransactionList(this.transactions);
+  final void Function(String) onRemove; //função importada do manis
+
+  TransactionList(this.transactions, this.onRemove);
 
   @override
   Widget build(BuildContext context) {
@@ -17,48 +19,30 @@ class TransactionList extends StatelessWidget {
         // lista para scroll q precisa de um pai com tamanho
         children: transactions.map((tr) {
           return Card(
-            child: Row(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 10,
-                  ),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                    color: Theme.of(context).primaryColor,
-                    width: 2,
-                  )),
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    'R\$ ${tr.value.toStringAsFixed(2)}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
+              margin: EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 5,
+              ),
+              child: ListTile(
+                leading: CircleAvatar(
+                  radius: 30,
+                  child: Padding(
+                      padding: const EdgeInsets.all(6),
+                      child: FittedBox(
+                        child: Text('R\$ ${tr.value}'),
+                      )),
                 ),
-                Column(
-                  children: <Widget>[
-                    Container(
-                      child: Text(
-                        tr.title,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold, //peso da fonte
-                        ),
-                      ),
-                    ),
-                    Text(
-                      DateFormat('d/M/y').format(tr.date),
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          );
+                title: Text(
+                  tr.title,
+                  style: Theme.of(context).textTheme.title,
+                ),
+                subtitle: Text(DateFormat('d MMM y').format(tr.date)),
+                trailing: IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () => onRemove(tr.id), // func passando o parametro
+                  color: Theme.of(context).errorColor,
+                ),
+              ));
         }).toList(), // to list para converter para uma lista
       ),
     );

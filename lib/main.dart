@@ -66,6 +66,14 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList(); //to list para n numerar e ter um padrão de lista
   }
 
+  _removeTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((tr) {
+        return tr.id == id;
+      });
+    });
+  }
+
   _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
         id: Random()
@@ -117,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //ctrl+. no card
             Chart(_recentTransactions),
             // mapeando objetos para a tela
-            TransactionList(_transactions),
+            TransactionList(_transactions, _removeTransaction),
           ],
         ),
       ),
