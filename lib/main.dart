@@ -135,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             //ctrl+. no card
             Container(
-              height: availabeleHeight * 0.30, //autura 30 %
+              height: availabeleHeight * 0.40, //autura 40 %
               child: Chart(_recentTransactions),
             ),
             // mapeando objetos para a tela
