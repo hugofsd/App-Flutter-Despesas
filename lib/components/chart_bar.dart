@@ -27,7 +27,7 @@ class ChartBar extends StatelessWidget {
             ),
             SizedBox(height: 6),
             Container(
-                height: Constraints.maxHeight * 0.68,
+                height: Constraints.maxHeight * 0.49,
                 width: 10,
                 //stack permite um componente ficar em cima do outro XD
                 child: Stack(
