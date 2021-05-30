@@ -41,6 +41,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   //import da class de transações
+
   final _transactions = {
     Transaction(
       id: 't1',
@@ -106,11 +107,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     final appBar = AppBar(
       title: Text(
         'Despesas',
         style: TextStyle(
-          fontSize: 17 * MediaQuery.of(context).textScaleFactor,
+          fontSize: 17 * mediaQuery.textScaleFactor,
         ),
       ),
       actions: <Widget>[
@@ -122,9 +124,9 @@ class _MyHomePageState extends State<MyHomePage> {
       // backgroundColor: Colors.purple,
     );
 
-    final availabeleHeight = MediaQuery.of(context).size.height -
+    final availabeleHeight = mediaQuery.size.height -
         appBar.preferredSize.height -
-        MediaQuery.of(context).padding.top; //autura da tela - autura do app bar
+        mediaQuery.padding.top; //autura da tela - autura do app bar
 
     return Scaffold(
       appBar: appBar,
