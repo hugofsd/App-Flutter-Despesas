@@ -54,29 +54,25 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
     groupedTransactions;
 
-    return Column(
-      children: [
-        Card(
-          elevation: 6,
-          margin: EdgeInsets.all(20),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: groupedTransactions.map((tr) {
-                return Flexible(
-                  fit: FlexFit.tight, // dividir os elementos de forma igual
-                  child: ChartBar(
-                    label: tr['day'],
-                    value: tr['value'],
-                    percentage: (tr['value'] as double) / _weekTotalValue,
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
+    return Card(
+      elevation: 6,
+      margin: EdgeInsets.all(20),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactions.map((tr) {
+            return Flexible(
+              fit: FlexFit.tight, // dividir os elementos de forma igual
+              child: ChartBar(
+                label: tr['day'],
+                value: tr['value'],
+                percentage: (tr['value'] as double) / _weekTotalValue,
+              ),
+            );
+          }).toList(),
         ),
-      ],
+      ),
     );
   }
 }

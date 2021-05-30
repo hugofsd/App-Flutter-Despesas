@@ -13,38 +13,35 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 420, //tamanlho para scroll
-      child: ListView(
-        // lista para scroll q precisa de um pai com tamanho
-        children: transactions.map((tr) {
-          return Card(
-              margin: EdgeInsets.symmetric(
-                horizontal: 8,
-                vertical: 5,
+    return ListView(
+      // lista para scroll q precisa de um pai com tamanho
+      children: transactions.map((tr) {
+        return Card(
+            margin: EdgeInsets.symmetric(
+              horizontal: 8,
+              vertical: 5,
+            ),
+            child: ListTile(
+              leading: CircleAvatar(
+                radius: 30,
+                child: Padding(
+                    padding: const EdgeInsets.all(6),
+                    child: FittedBox(
+                      child: Text('R\$ ${tr.value}'),
+                    )),
               ),
-              child: ListTile(
-                leading: CircleAvatar(
-                  radius: 30,
-                  child: Padding(
-                      padding: const EdgeInsets.all(6),
-                      child: FittedBox(
-                        child: Text('R\$ ${tr.value}'),
-                      )),
-                ),
-                title: Text(
-                  tr.title,
-                  style: Theme.of(context).textTheme.title,
-                ),
-                subtitle: Text(DateFormat('d MMM y').format(tr.date)),
-                trailing: IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () => onRemove(tr.id), // func passando o parametro
-                  color: Theme.of(context).errorColor,
-                ),
-              ));
-        }).toList(), // to list para converter para uma lista
-      ),
+              title: Text(
+                tr.title,
+                style: Theme.of(context).textTheme.title,
+              ),
+              subtitle: Text(DateFormat('d MMM y').format(tr.date)),
+              trailing: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () => onRemove(tr.id), // func passando o parametro
+                color: Theme.of(context).errorColor,
+              ),
+            ));
+      }).toList(), // to list para converter para uma lista
     );
   }
 }

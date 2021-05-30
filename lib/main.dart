@@ -102,17 +102,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: Text('Despesas'),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => _openTransactionFormModal(context),
+        )
+      ],
+      // backgroundColor: Colors.purple,
+    );
+
+    final availabeleHeight = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top; //autura da tela - autura do app bar
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Despesas'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _openTransactionFormModal(context),
-          )
-        ],
-        // backgroundColor: Colors.purple,
-      ),
+      appBar: appBar,
       // habilitar rolagem
 
       body: SingleChildScrollView(
@@ -123,9 +129,15 @@ class _MyHomePageState extends State<MyHomePage> {
           //lista
           children: <Widget>[
             //ctrl+. no card
-            Chart(_recentTransactions),
+            Container(
+              height: availabeleHeight * 0.30, //autura 30 %
+              child: Chart(_recentTransactions),
+            ),
             // mapeando objetos para a tela
-            TransactionList(_transactions, _removeTransaction),
+            Container(
+              height: availabeleHeight * 0.7, //autura 70% da tela
+              child: TransactionList(_transactions, _removeTransaction),
+            ),
           ],
         ),
       ),
